@@ -60,3 +60,4 @@ LIST
 '''
 miLista:[str] = ["Martin", "Juan", "Pablo"]
 print(*miLista) #Imprime la lista, sin necesitar el uso de un bucle
+
