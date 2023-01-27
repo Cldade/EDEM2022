@@ -1,10 +1,29 @@
-#Librerias
+# Libraries needed
 from kafka import KafkaProducer
+import time
+from json import dumps
+import random
 
-#Métodos
+producer = None
+while producer==None:
+    try:
+        producer = KafkaProducer(bootstrap_servers=['kafka0:29092'],value_serializer=lambda x: dumps(x).encode('utf-8'))
+        print("Connection Established")
+        time.sleep(0.1)
+    except Exception as err:
+        print(f"Waiting for broker")
+
+
+# Methods
 def send_data():
-    print('Hola Mundo')
+    data_json= {"name":"John", "age":30, "city":"New York"}
+    print(data_json)
+    producer.send("mocked_data",data_json)
+    producer.flush()
 
-#Main
-for i in range(1,10):
+
+# Main
+while True:
     send_data()
+    time.sleep(5)
+
